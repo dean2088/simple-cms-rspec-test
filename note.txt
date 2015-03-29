@@ -1,0 +1,27 @@
+rake 
+rake db:schema:dump
+rails generate migration DoNothingYet
+rails generate model User
+rake db:migrate
+rake db:migrate VERSION=0
+rake db:migrate:status
+
+rails generate migration AlterUsers
+
+irb
+rails console
+ 
+rails generate controller Subjects index show new edit delete
+//===========
+config/routes.rb
+match ':controller(/:action(/:id))', :via=>[:get,:post]
+
+//===========
+command+/
+//==========
+rails generate controller Access index login
+rails generate controller Public index show
+
+bundle exec rspec spec/
+
+http://www.w3cschool.cc/ruby/ruby-input-output.html

@@ -1,0 +1,15 @@
+<h1>Demo#index</h1>
+<p>Index word!</p>
+<%= link_to('Hello page 1',{:action => 'hello'})%>
+<br/>
+<%= link_to('Hello page 2',{:action => 'index'})%><!--从route上找最简单的link-->
+<br/>
+<%= link_to('Hello with parameters',{:action => 'hello',:page=>5,:id=>20}) %>
+<br/>
+<% name = "Kevin" %>
+
+<%= link_to('Roar', '#', :onclick => "jsRoar('#{name}'); return true;") %>
+
+<!--
+<%= javascript_tag("jsRoar('#{name}');") %>
+-->

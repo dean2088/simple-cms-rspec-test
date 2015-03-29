@@ -1,0 +1,164 @@
+-- phpMyAdmin SQL Dump
+-- version 3.5.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Mar 29, 2015 at 11:39 PM
+-- Server version: 5.5.25
+-- PHP Version: 5.4.4
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `ruby_test`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_users`
+--
+
+CREATE TABLE `admin_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(25) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `email` varchar(100) NOT NULL DEFAULT '',
+  `username` varchar(25) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `password_digest` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_admin_users_on_username` (`username`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `admin_users`
+--
+
+INSERT INTO `admin_users` (`id`, `first_name`, `last_name`, `email`, `username`, `created_at`, `updated_at`, `password_digest`) VALUES
+(1, 'Mian', 'Huang', 'miandev@gmail.com', 'testadmin', NULL, '2015-03-11 03:46:17', '$2a$10$uDADs0Fsij8LaAiPLjHlVeoKAH77ds9hacQemu8whwUJ4P1nYMH7.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pages`
+--
+
+CREATE TABLE `pages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `subject_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `permalink` varchar(255) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `visible` tinyint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_pages_on_subject_id` (`subject_id`),
+  KEY `index_pages_on_permalink` (`permalink`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `pages`
+--
+
+INSERT INTO `pages` (`id`, `subject_id`, `name`, `permalink`, `position`, `visible`, `created_at`, `updated_at`) VALUES
+(1, 1, 'First Page', 'first', 2, 1, '2015-03-10 00:00:00', '2015-03-10 00:00:00'),
+(2, 2, 'Second Page', 'second', 2, 1, '2015-03-10 00:00:00', '2015-03-11 05:25:36'),
+(3, 1, 'TestPage', '3-testpage', 1, 0, '2015-03-11 04:58:55', '2015-03-11 05:09:02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schema_migrations`
+--
+
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `schema_migrations`
+--
+
+INSERT INTO `schema_migrations` (`version`) VALUES
+('20150310024643'),
+('20150310024657'),
+('20150310030848'),
+('20150310034111'),
+('20150310034118'),
+('20150310034128'),
+('20150311014954'),
+('20150311022756');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sections`
+--
+
+CREATE TABLE `sections` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_id` int(11) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `visible` tinyint(1) DEFAULT '0',
+  `content_type` varchar(255) DEFAULT NULL,
+  `content` text,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_sections_on_page_id` (`page_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `sections`
+--
+
+INSERT INTO `sections` (`id`, `page_id`, `name`, `position`, `visible`, `content_type`, `content`, `created_at`, `updated_at`) VALUES
+(1, 2, 'Section ONE', 1, 1, 'text', 'test', '2015-03-10 06:19:56', '2015-03-11 04:42:28');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `section_edits`
+--
+
+CREATE TABLE `section_edits` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `admin_user_id` int(11) DEFAULT NULL,
+  `section_id` int(11) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_section_edits_on_admin_user_id_and_section_id` (`admin_user_id`,`section_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `visible` tinyint(1) DEFAULT '0',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `name`, `position`, `visible`, `created_at`, `updated_at`) VALUES
+(1, 'Initial Subject', 1, 1, '2015-03-10 00:00:00', '2015-03-11 05:09:02'),
+(2, 'Revised Subject', 2, 1, '2015-03-10 00:00:01', '2015-03-11 05:25:36'),
+(3, 'Third Subject', 3, 0, '2015-03-10 00:00:03', NULL);

@@ -1,0 +1,25 @@
+== README
+
+* Rails version: 4.2.0
+
+* System dependencies: I use the Eclipse + Aptana on the MAC computer, the database is MAMP's MySql
+
+* Configuration: change the database setting to your local database, in here, I use the mysql
+
+* Database creation: after you finished the config/database.yml, input "rake db:migrate" 
+					in the Terminal and then use the sql.txt to upload the test data
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions 1:
+	First you need to go to the root page and it would go to the login page, input the username:testadmin, 
+	and password: admin. go to the Admin menu
+	
+	Click the "Manage Content", you could manage the subject. If you click the "View Pages", It would go the 
+	pages manage page. After that you could also click the " View Sections" and do the CRUD for the sections.
+	
+	After you login, you could also go to the "Manage Admin Users" page and do the CRUD for the admin users 
+	
+* Deployment instructions 2 (rspec):
+	This is a simple rspec practice, I only test the subjects_controller and subject models.
+
